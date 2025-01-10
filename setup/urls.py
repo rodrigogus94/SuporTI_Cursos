@@ -1,12 +1,10 @@
 from django.contrib import admin
-from django.urls import path
-from cursos.views import index, imagem, buscar, login, cadastro, logout
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", index, name="index"),
-    path("buscar", buscar, name="buscar"),
-    path("login", login, name="login"),
-    path("cadastro", cadastro, name="cadastro"),
-    path("logout", logout, name="logout"),
-]
+    path('admin/', admin.site.urls),
+    path('', include('cursos.urls')),
+    path('', include('usuarios.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
