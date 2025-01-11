@@ -15,13 +15,3 @@ def buscar(request):
     pass
 
 
-def login(request):
-    pass
-
-
-def logout(request):
-    pass
-
-
-def cadastro(request):
-    pass

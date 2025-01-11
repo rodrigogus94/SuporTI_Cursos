@@ -6,7 +6,7 @@ from usuarios.models import customUser
 class customUserAdmin(UserAdmin):
     model = customUser
     fieldsets = (
-        (None, {"fields": ("nome", "email", "password")}),
+        (None, {"fields": ("nome", "email", "password", "first_name", "last_name")}),
         (
             "Permissões",
             {
