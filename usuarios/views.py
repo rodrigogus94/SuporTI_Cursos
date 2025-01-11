@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from usuarios.forms import LoginForms, CadastroForms
-from django.contrib.auth.models import User
-from django.contrib import auth
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from usuarios.models import customUser
 from django.contrib import messages
 
 
@@ -12,17 +12,13 @@ def login(request):
         form = LoginForms(request.POST)
 
         if form.is_valid():
-            nome = form['nome_login'].value()
+            email = form['email'].value()
             senha = form['senha'].value()
 
-        usuario = auth.authenticate(
-            request,
-            username=nome,
-            password=senha
-        )
+        usuario = authenticate(request, email = email, password = senha)
         if usuario is not None:
-            auth.login(request, usuario)
-            messages.success(request, f'{nome} logado com sucesso!')
+            auth_login(request, usuario)
+            messages.success(request, f'{request.user} logado com sucesso!')
             return redirect('index')
         else:
             messages.error(request, 'Erro ao efetuar login')
@@ -41,11 +37,15 @@ def cadastro(request):
             email=form['email'].value()
             senha=form['senha_1'].value()
 
-            if User.objects.filter(username=nome).exists():
+            if customUser.objects.filter(username=nome).exists():
                 messages.error(request, 'Usuário já existente')
                 return redirect('cadastro')
+            
+            if customUser.objects.filter(email = email).exists():
+                messages.error(request, "E-mail já cadastrado.")
+                return redirect('cadastro')
 
-            usuario = User.objects.create_user(
+            usuario = customUser.objects.create_user(
                 username=nome,
                 email=email,
                 password=senha
@@ -57,6 +57,6 @@ def cadastro(request):
     return render(request, 'cursos/usuarios/cadastro.html', {'form': form})
 
 def logout(request):
-    auth.logout(request)
+    auth_logout(request)
     messages.success(request, 'Logout efetuado com sucesso!')
     return redirect('login')
