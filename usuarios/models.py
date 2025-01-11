@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
+from datetime import datetime
 
 
 class customUserManager(BaseUserManager):
@@ -39,6 +40,7 @@ class customUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=datetime.now, blank=False)
 
     objects = customUserManager()
 
