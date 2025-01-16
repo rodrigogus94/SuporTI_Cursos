@@ -7,5 +7,23 @@
     },
     "emmet.includeLanguages": {
         "djando-html": "html"
-    }
+    },
+    
+    "html-to-css-autocompletion.autocompletionFilesScope": "workspace",
+
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    
+    "[django-html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": { 
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true 
+    },
+    
+
+
 }
