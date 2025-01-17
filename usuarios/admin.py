@@ -6,7 +6,10 @@ from usuarios.models import customUser
 class customUserAdmin(UserAdmin):
     model = customUser
     fieldsets = (
-        (None, {"fields": ("nome", "email", "password", "first_name", "last_name")}),
+        (
+            None,
+            {"fields": ("username", "email", "password", "first_name", "last_name")},
+        ),
         (
             "Permissões",
             {
@@ -28,8 +31,10 @@ class customUserAdmin(UserAdmin):
             {
                 "classes": ("wide"),
                 "fields": (
-                    "nome",
+                    "username",
                     "email",
+                    "first_name",
+                    "last_name",
                     "password1",
                     "password2",
                     "is_staff",
@@ -39,9 +44,9 @@ class customUserAdmin(UserAdmin):
         ),
     )
 
-    list_display = ("nome", "email", "is_staff", "is_superuser")
-    search_fields = ("nome", "email")
-    ordering = ("nome", "email")
+    list_display = ("username", "email", "is_staff", "is_superuser")
+    search_fields = ("username", "email")
+    ordering = ("username", "email")
 
 
 admin.site.register(customUser, customUserAdmin)
