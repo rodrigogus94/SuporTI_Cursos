@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.github",
-    'allauth.socialaccount.providers.google',
+    "allauth.socialaccount.providers.google",
     "django.contrib.sites",
 ]
 
@@ -137,7 +137,7 @@ STATIC_URL = "static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-#STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -169,3 +169,5 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     },
 }
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
